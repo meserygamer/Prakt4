@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Prakt4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="90"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="36"
+                   FontWeight="Bold"
+                   Grid.ColumnSpan="2">Интересная информация про вашу дату рождения</TextBlock>
+        <StackPanel Grid.Row="1"
+            Grid.Column = "0">
+            <TextBlock FontSize="22" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Center">Введите вашу дату рождения:</TextBlock>
+            <Border 
+                MaxHeight="40"
+                VerticalAlignment="Top"
+                Margin="10"
+                CornerRadius="10"
+                BorderBrush="Black"
+                BorderThickness="1" 
+                Padding="5,0,5,0">
+                <DatePicker FontSize="20"
+                    VerticalAlignment="Center"
+                    BorderBrush="#0000"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>
