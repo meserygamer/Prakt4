@@ -5,37 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Prakt4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
-    <Grid>
+        Title="MainWindow" Height="600" Width="420" MinWidth="420">
+    <Window.Resources>
+        <local:CalculationOfTheNumberOfYearsPassedConverter x:Key ="YearConverter"/>
+        <local:CalculationOfTheNumberOfMonthPassedConverter x:Key ="MonthConverter"/>
+        <local:CalculationOfTheNumberOfDaysPassedConverter x:Key ="DaysConverter"/>
+        <local:CalculateDayOfBirthDay x:Key ="DayOfBirthdayConverter"/>
+        <local:MainWindowViewModel x:Key="VM"></local:MainWindowViewModel>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource VM}">
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="90"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="1*"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="36"
-                   FontWeight="Bold"
-                   Grid.ColumnSpan="2">Интересная информация про вашу дату рождения</TextBlock>
-        <StackPanel Grid.Row="1"
-            Grid.Column = "0">
-            <TextBlock FontSize="22" Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Center">Введите вашу дату рождения:</TextBlock>
-            <Border 
-                MaxHeight="40"
-                VerticalAlignment="Top"
-                Margin="10"
-                CornerRadius="10"
-                BorderBrush="Black"
-                BorderThickness="1" 
-                Padding="5,0,5,0">
-                <DatePicker FontSize="20"
-                    VerticalAlignment="Center"
-                    BorderBrush="#0000"/>
-            </Border>
-        </StackPanel>
+                   FontSize="24" FontWeight="Bold" FontStyle="Italic">
+            Заглушка</TextBlock>
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel
+                Margin="0 5 0 0">
+                <TextBlock 
+                    FontSize="20"
+                    Margin="0 0 0 5"
+                    HorizontalAlignment="Center">Введите свою дату рождения:</TextBlock>
+                <DatePicker x:Name="datePicker" FontSize="18" SelectedDate="{Binding UserSelectedBirthday, Mode=OneWayToSource}"></DatePicker>
+            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <StackPanel>
+                    <TextBlock 
+                        FontSize="20">
+                        С момента вашего рождения прошло:</TextBlock>
+                    <TextBlock 
+                        Text="{Binding SelectedDate, ElementName=datePicker, Converter={StaticResource YearConverter}}"
+                        FontSize="18" ></TextBlock>
+                    <TextBlock 
+                        Text="{Binding SelectedDate, ElementName=datePicker, Converter={StaticResource MonthConverter}}"
+                        FontSize="18" ></TextBlock>
+                    <TextBlock 
+                        Text="{Binding SelectedDate, ElementName=datePicker, Converter={StaticResource DaysConverter}}"
+                        FontSize="18" ></TextBlock>
+                    <TextBlock 
+                        Text="{Binding SelectedDate, ElementName=datePicker, Converter={StaticResource DayOfBirthdayConverter}}"
+                        FontSize="18"></TextBlock>
+                    <TextBlock 
+                        Text="{Binding StringFormat= Количество дней рождений отпразднованных в этот день - {0} (Включая день когда вы родились), Source={StaticResource VM}, Path=NumberOfBirthdaysCelebratedOnTheBirthday}"
+                        TextWrapping="Wrap"
+                        FontSize="18"></TextBlock>
+                    <TextBlock 
+                        Text="{Binding StringFormat = Количество прошедших весокосных лет - {0}, Source={StaticResource VM}, Path=NumberOfLeapYearsExperienced}"
+                        FontSize="18"
+                        TextWrapping="Wrap"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
