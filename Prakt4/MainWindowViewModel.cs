@@ -16,6 +16,7 @@ namespace Prakt4
     class MainWindowViewModel : INotifyPropertyChanged
     {
         private DateTime? _userSelectedBirthday;
+        private DateTime _nowDateTime;
 
         public DateTime? UserSelectedBirthday
         {
@@ -26,6 +27,17 @@ namespace Prakt4
                 OnPropertyChanged("UserSelectedBirthday");
                 OnPropertyChanged("NumberOfBirthdaysCelebratedOnTheBirthday");
                 OnPropertyChanged("NumberOfLeapYearsExperienced");
+            }
+        }
+        public DateTime NowDateTime
+        {
+            get { 
+                return _nowDateTime;
+            }
+            set
+            {
+                _nowDateTime = value;
+                OnPropertyChanged("NowDateTime");
             }
         }
 
@@ -63,9 +75,14 @@ namespace Prakt4
                     }
                     else Birtday = Birtday.AddYears(1);
                 }
-                LeapYears = LeapYears.Remove(LeapYears.Length - 1, 1);
-                return counter.ToString() + "(" + LeapYears + ")";
+                if(LeapYears.Length > 0) LeapYears = LeapYears.Remove(LeapYears.Length - 1, 1);
+                return counter.ToString() + " (" + LeapYears + ")";
             }
+        }
+
+        public MainWindowViewModel()
+        {
+            NowDateTime = DateTime.Now;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

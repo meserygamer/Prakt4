@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Prakt4"
+        xmlns:sys="clr-namespace:System;assembly=System"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="420" MinWidth="420">
     <Window.Resources>
@@ -37,9 +38,22 @@
                     FontSize="20"
                     Margin="0 0 0 5"
                     HorizontalAlignment="Center">Введите свою дату рождения:</TextBlock>
-                <DatePicker x:Name="datePicker" FontSize="18" SelectedDate="{Binding UserSelectedBirthday, Mode=OneWayToSource}"></DatePicker>
+                <DatePicker x:Name="datePicker"
+                            FontSize="18"
+                            SelectedDate="{Binding UserSelectedBirthday, Mode=OneWayToSource}"
+                            DisplayDateEnd="{Binding NowDateTime}"></DatePicker>
             </StackPanel>
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.Style>
+                    <Style TargetType = "Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedDate, ElementName=datePicker}" 
+                                         Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Hidden"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <StackPanel>
                     <TextBlock 
                         FontSize="20">
