@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Prakt4"
         xmlns:sys="clr-namespace:System;assembly=System"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="420" MinWidth="420">
+        Title="Практическая работа №4" Height="600" Width="420">
     <Window.Resources>
         <local:CalculationOfTheNumberOfYearsPassedConverter x:Key ="YearConverter"/>
         <local:CalculationOfTheNumberOfMonthPassedConverter x:Key ="MonthConverter"/>
@@ -20,64 +20,52 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   HorizontalAlignment="Center"
-                   FontSize="24" FontWeight="Bold" FontStyle="Italic">
-            Заглушка</TextBlock>
-        <Grid Grid.Row="1" Margin="5">
+                   Style="{StaticResource MainLabelTextBlock}">
+            Факты о дате рождения</TextBlock>
+        <Grid Grid.Row="1" 
+              Style="{StaticResource UnderMainLabelGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height ="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel
-                Margin="0 5 0 0">
+                Style="{StaticResource InputBirthDayStackPanel}">
                 <TextBlock 
-                    FontSize="20"
-                    Margin="0 0 0 5"
-                    HorizontalAlignment="Center">Введите свою дату рождения:</TextBlock>
+                    Style="{StaticResource InputBirthDayTextBlock}">
+                    Введите свою дату рождения:</TextBlock>
                 <DatePicker x:Name="datePicker"
-                            FontSize="18"
+                            Style="{StaticResource InputBirthDayDatePicker}"
                             SelectedDate="{Binding UserSelectedBirthday, Mode=OneWayToSource}"
-                            DisplayDateEnd="{Binding NowDateTime}"></DatePicker>
+                            DisplayDateEnd="{Binding NowDateTime}">
+                </DatePicker>
             </StackPanel>
-            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid.Style>
-                    <Style TargetType = "Grid">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedDate, ElementName=datePicker}" 
-                                         Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Hidden"></Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
+            <Grid Grid.Row="1" Grid.Column="0"
+                  Style="{StaticResource InfoGrid}">
                 <StackPanel>
                     <TextBlock 
-                        FontSize="20">
+                        Style="{StaticResource InfoTextBlock}">
                         С момента вашего рождения прошло:</TextBlock>
                     <TextBlock 
                         Text="{Binding SelectedDate, ElementName=datePicker, Converter={StaticResource YearConverter}}"
-                        FontSize="18" ></TextBlock>
+                        Style="{StaticResource InfoTextBlock}"></TextBlock>
                     <TextBlock 
                         Text="{Binding SelectedDate, ElementName=datePicker, Converter={StaticResource MonthConverter}}"
-                        FontSize="18" ></TextBlock>
+                        Style="{StaticResource InfoTextBlock}"></TextBlock>
                     <TextBlock 
                         Text="{Binding SelectedDate, ElementName=datePicker, Converter={StaticResource DaysConverter}}"
-                        FontSize="18" ></TextBlock>
+                        Style="{StaticResource InfoTextBlock}"></TextBlock>
                     <TextBlock 
                         Text="{Binding SelectedDate, ElementName=datePicker, Converter={StaticResource DayOfBirthdayConverter}}"
-                        FontSize="18"></TextBlock>
+                        Style="{StaticResource InfoTextBlock}"></TextBlock>
                     <TextBlock 
                         Text="{Binding StringFormat= Количество дней рождений отпразднованных в этот день - {0} (Включая день когда вы родились), Source={StaticResource VM}, Path=NumberOfBirthdaysCelebratedOnTheBirthday}"
-                        TextWrapping="Wrap"
-                        FontSize="18"></TextBlock>
+                        Style="{StaticResource InfoTextBlock}"></TextBlock>
                     <TextBlock 
                         Text="{Binding StringFormat = Количество прошедших весокосных лет - {0}, Source={StaticResource VM}, Path=NumberOfLeapYearsExperienced}"
-                        FontSize="18"
-                        TextWrapping="Wrap"></TextBlock>
+                        Style="{StaticResource InfoTextBlock}"></TextBlock>
                 </StackPanel>
             </Grid>
         </Grid>

@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="MainLabelTextBlock"
+           TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="FontStyle" Value="Italic"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+    </Style>
+
+    <Style x:Key="UnderMainLabelGrid"
+           TargetType="Grid">
+        <Setter Property="Margin" Value="5"></Setter>
+    </Style>
+
+    <Style x:Key="InputBirthDayStackPanel"
+        TargetType="StackPanel">
+        <Setter Property="Margin" Value="0 5 0 0"></Setter>
+    </Style>
+
+    <Style x:Key="InputBirthDayTextBlock"
+        TargetType="TextBlock">
+        <Setter Property="Margin" Value="0 0 0 5"></Setter>
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+    </Style>
+
+    <Style x:Key="InputBirthDayDatePicker"
+        TargetType="DatePicker">
+        <Setter Property="FontSize" Value="18"></Setter>
+    </Style>
+
+    <Style x:Key="InfoGrid"
+    TargetType="Grid">
+        <Setter Property="Grid.ColumnSpan" Value="2"></Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding SelectedDate, ElementName=datePicker}" 
+                Value="{x:Null}">
+                <Setter Property="Visibility" Value="Hidden"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="InfoTextBlock"
+        TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+    </Style>
+</ResourceDictionary>
