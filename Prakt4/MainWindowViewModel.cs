@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using RealizePythonList;
 
 namespace Prakt4
 {
@@ -324,17 +325,16 @@ namespace Prakt4
             switch((int)value[1])
             {
                 case 1:
-                    string[] Animals = new string[] {"Крыса",
-                    "Бык","Тигр","Кролик","Дракон", "Змея", "Лошадь", "Овца",
-                    "Обезьяна","Петух", "Собака", "Свинья"};
-                    int Animal2023 = 3;
-                    int Change = (((DateTime)value[0]).Year - 2023) % 12;
-                    int CurrentAnimal;
-                    if (Animal2023 + Change < 0) CurrentAnimal = Animal2023 + Change + 12;
-                    else if (Animal2023 + Change > 11) CurrentAnimal = Animal2023 + Change - 12;
-                    else CurrentAnimal = Animal2023 + Change;
-                    return $"По календарю вы {Animals[CurrentAnimal]}";
+                    PythonList<string> Animals = new PythonList<string>("Крыса",
+                    "Бык", "Тигр", "Кролик", "Дракон", "Змея", "Лошадь", "Овца",
+                    "Обезьяна", "Петух", "Собака", "Свинья");
+                    PythonList<string> Colors = new PythonList<string>("Инь белый",
+                    "Янь белый", "Инь синий", "Янь синий", "Инь зеленый", "Янь зеленый", "Инь красный", "Янь красный",
+                    "Инь желтый", "Янь желтый");
+                    int Change = ((DateTime)value[0]).Year - 2020;
+                    return $"По календарю вы {Colors[Change]} {Animals[Change]}";
                 case 2:
+                    return "2";
                     break;
                 default: 
                     return "ХЗ";

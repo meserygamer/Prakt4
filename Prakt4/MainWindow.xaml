@@ -80,7 +80,7 @@
                             <ComboBoxItem>Древнеславянский календарь</ComboBoxItem>
                         </ComboBox>
                     </GroupBox>
-                    <TextBlock>
+                    <TextBlock >
                         <TextBlock.Text>
                             <MultiBinding Converter="{StaticResource PokrovitConverter}">
                                 <Binding Path="UserSelectedBirthday"></Binding>
