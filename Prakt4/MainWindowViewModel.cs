@@ -26,6 +26,10 @@ namespace Prakt4
         /// Хранит сегодняшнюю дату (Нужен для ограничения календаря)
         /// </summary>
         private DateTime _nowDateTime;
+        /// <summary>
+        /// Хранит номер выбранного календаря
+        /// </summary>
+        private int _idCurrentCalendar;
 
         /// <summary>
         /// Свойство для получения выбранной пользователем даты
@@ -54,6 +58,19 @@ namespace Prakt4
             {
                 _nowDateTime = value;
                 OnPropertyChanged("NowDateTime");
+            }
+        }
+
+        /// <summary>
+        /// Свойство для получения выбранного календаря
+        /// </summary>
+        public int IdCurrentCalendar
+        {
+            get=> _idCurrentCalendar;
+            set
+            {
+                _idCurrentCalendar = value;
+                OnPropertyChanged("IdCurrentCalendar");
             }
         }
 
@@ -295,6 +312,39 @@ namespace Prakt4
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return DependencyProperty.UnsetValue;
+        }
+    }
+
+    class CalculatePokrovitOfBirthDay : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value[0] is null) return null;
+            if ((int)value[1] == 0) return null;
+            switch((int)value[1])
+            {
+                case 1:
+                    string[] Animals = new string[] {"Крыса",
+                    "Бык","Тигр","Кролик","Дракон", "Змея", "Лошадь", "Овца",
+                    "Обезьяна","Петух", "Собака", "Свинья"};
+                    int Animal2023 = 3;
+                    int Change = (((DateTime)value[0]).Year - 2023) % 12;
+                    int CurrentAnimal;
+                    if (Animal2023 + Change < 0) CurrentAnimal = Animal2023 + Change + 12;
+                    else if (Animal2023 + Change > 11) CurrentAnimal = Animal2023 + Change - 12;
+                    else CurrentAnimal = Animal2023 + Change;
+                    return $"По календарю вы {Animals[CurrentAnimal]}";
+                case 2:
+                    break;
+                default: 
+                    return "ХЗ";
+            }
+        }
+
+        public object[] ConvertBack(
+        object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
         }
     }
 }

@@ -12,6 +12,7 @@
         <local:CalculationOfTheNumberOfMonthPassedConverter x:Key ="MonthConverter"/>
         <local:CalculationOfTheNumberOfDaysPassedConverter x:Key ="DaysConverter"/>
         <local:CalculateDayOfBirthDay x:Key ="DayOfBirthdayConverter"/>
+        <local:CalculatePokrovitOfBirthDay x:Key="PokrovitConverter"/>
         <local:MainWindowViewModel x:Key="VM"></local:MainWindowViewModel>
     </Window.Resources>
     <Grid DataContext="{StaticResource VM}">
@@ -44,7 +45,11 @@
             </StackPanel>
             <Grid Grid.Row="1" Grid.Column="0"
                   Style="{StaticResource InfoGrid}">
-                <StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row = "0">
                     <TextBlock 
                         Style="{StaticResource InfoTextBlock}">
                         С момента вашего рождения прошло:</TextBlock>
@@ -66,6 +71,23 @@
                     <TextBlock 
                         Text="{Binding StringFormat = Количество прошедших весокосных лет - {0}, Source={StaticResource VM}, Path=NumberOfLeapYearsExperienced}"
                         Style="{StaticResource InfoTextBlock}"></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <GroupBox Header="Выберите календарь">
+                        <ComboBox SelectedIndex="{Binding IdCurrentCalendar}">
+                            <ComboBoxItem IsSelected="True" IsEnabled="False">По умолчанию</ComboBoxItem>
+                            <ComboBoxItem>Восточный календарь</ComboBoxItem>
+                            <ComboBoxItem>Древнеславянский календарь</ComboBoxItem>
+                        </ComboBox>
+                    </GroupBox>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource PokrovitConverter}">
+                                <Binding Path="UserSelectedBirthday"></Binding>
+                                <Binding Path="IdCurrentCalendar"></Binding>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </StackPanel>
             </Grid>
         </Grid>
