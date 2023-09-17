@@ -20,11 +20,9 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0"
-                   Style="{StaticResource MainLabelTextBlock}">
+        <TextBlock Style="{StaticResource MainLabelTextBlock}">
             Факты о дате рождения</TextBlock>
-        <Grid Grid.Row="1" 
-              Style="{StaticResource UnderMainLabelGrid}">
+        <Grid Style="{StaticResource UnderMainLabelGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -43,13 +41,12 @@
                             DisplayDateEnd="{Binding NowDateTime}">
                 </DatePicker>
             </StackPanel>
-            <Grid Grid.Row="1" Grid.Column="0"
-                  Style="{StaticResource InfoGrid}">
+            <Grid Style="{StaticResource InfoGrid}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row = "0">
+                <StackPanel Style="{StaticResource MainContentStackPanel}">
                     <TextBlock 
                         Style="{StaticResource InfoTextBlock}">
                         С момента вашего рождения прошло:</TextBlock>
@@ -72,15 +69,16 @@
                         Text="{Binding StringFormat = Количество прошедших весокосных лет - {0}, Source={StaticResource VM}, Path=NumberOfLeapYearsExperienced}"
                         Style="{StaticResource InfoTextBlock}"></TextBlock>
                 </StackPanel>
-                <StackPanel Grid.Row="1">
-                    <GroupBox Header="Выберите календарь">
-                        <ComboBox SelectedIndex="{Binding IdCurrentCalendar}">
+                <StackPanel Style="{StaticResource SecondExerciseStackPanel}">
+                    <GroupBox Style="{StaticResource CalenderChoiceGroupBox}">
+                        <ComboBox SelectedIndex="{Binding IdCurrentCalendar}"
+                                  Style="{StaticResource CalenderChoiceComboBox}">
                             <ComboBoxItem IsSelected="True" IsEnabled="False">По умолчанию</ComboBoxItem>
                             <ComboBoxItem>Восточный календарь</ComboBoxItem>
                             <ComboBoxItem>Древнеславянский календарь</ComboBoxItem>
                         </ComboBox>
                     </GroupBox>
-                    <TextBlock >
+                    <TextBlock Style="{StaticResource CalenderChoiceResultTextBlock}">
                         <TextBlock.Text>
                             <MultiBinding Converter="{StaticResource PokrovitConverter}">
                                 <Binding Path="UserSelectedBirthday"></Binding>

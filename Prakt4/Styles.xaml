@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="MainLabelTextBlock"
            TargetType="TextBlock">
+        <Setter Property="Grid.Row" Value="0"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="FontSize" Value="24"></Setter>
         <Setter Property="FontWeight" Value="Bold"></Setter>
@@ -11,6 +12,7 @@
 
     <Style x:Key="UnderMainLabelGrid"
            TargetType="Grid">
+        <Setter Property="Grid.Row" Value="1"></Setter>
         <Setter Property="Margin" Value="5"></Setter>
     </Style>
 
@@ -33,6 +35,8 @@
 
     <Style x:Key="InfoGrid"
     TargetType="Grid">
+        <Setter Property="Grid.Row" Value="1"></Setter>
+        <Setter Property="Grid.Column" Value="0"></Setter>
         <Setter Property="Grid.ColumnSpan" Value="2"></Setter>
         <Style.Triggers>
             <DataTrigger Binding="{Binding SelectedDate, ElementName=datePicker}" 
@@ -46,5 +50,27 @@
         TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"></Setter>
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
+    </Style>
+
+    <Style x:Key="MainContentStackPanel" TargetType="StackPanel">
+        <Setter Property="Grid.Row" Value="0"></Setter>
+    </Style>
+
+    <Style x:Key="SecondExerciseStackPanel" TargetType="StackPanel">
+        <Setter Property="Grid.Row" Value="1"></Setter>
+    </Style>
+
+    <Style x:Key="CalenderChoiceGroupBox" TargetType="GroupBox">
+        <Setter Property="Header" Value="Выберите календарь"></Setter>
+        <Setter Property="FontSize" Value="18"></Setter>
+    </Style>
+
+    <Style x:Key="CalenderChoiceComboBox" TargetType="ComboBox">
+        <Setter Property="FontSize" Value="18"></Setter>
+    </Style>
+
+    <Style x:Key="CalenderChoiceResultTextBlock" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="FontSize" Value="18"></Setter>
     </Style>
 </ResourceDictionary>
